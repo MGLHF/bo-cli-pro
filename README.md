@@ -1,8 +1,6 @@
 ### 开发
 
 ```js
-git clone https://github.com/MGLHF/single-pro.git
-cd single-pro
 npm i
 npm run dev
 ```
