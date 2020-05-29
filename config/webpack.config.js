@@ -15,6 +15,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.vue'],
     alias: {
+      '@': path.resolve(__dirname, '../src'),
       '@main': path.resolve(__dirname, '../src/main'),
       '@app1': path.resolve(__dirname, '../src/app1'),
       '@app2': path.resolve(__dirname, '../src/app2'),
