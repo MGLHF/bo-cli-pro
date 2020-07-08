@@ -1,11 +1,11 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const PUBLIC_PATH = '/';
 module.exports = {
-  entry: path.resolve(__dirname, '../src/single-spa.config.js'),
+  entry: {
+    vendor: ['lodash', 'antd'],
+    main: path.resolve(__dirname, '../src/single-spa.config.js'),
+  },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'js/[name].[contenthash:8].js',
@@ -43,12 +43,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: /\.(jsx|js)$/i,
-      //   exclude: /node_modules/,
-      //   include: [path.resolve(__dirname, '../src/main')],
-      //   loader: 'eslint-loader',
-      // },
       {
         test: /\.vue$/i,
         exclude: /node_modules/,
@@ -76,15 +70,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.resolve(__dirname, '../src/index.html'),
-    }),
-    new MiniCssExtractPlugin({
-      filename: process.env.NODE_ENV !== 'production' ? 'css/[name].css' : 'css/[name].[hash:8].css',
-      chunkFilename: process.env.NODE_ENV !== 'production' ? 'css/[id].css' : 'css/[id].[hash:8].css',
-    }),
-    new VueLoaderPlugin(),
-  ],
 };
