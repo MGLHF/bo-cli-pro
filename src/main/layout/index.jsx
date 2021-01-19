@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from 'antd';
+import { registerApplication } from 'single-spa';
+import appConfig from '@/single-spa.config';
 import { HeaderNavBar, NavBar } from '@main/components';
 
 const MainLayout = () => {
   const { Content, Sider } = Layout;
   const [collapsed, setCollapsed] = useState(false);
+  useEffect(() => {
+    appConfig.forEach(item => {
+      registerApplication(item.name, () => item.entryPath(), location => item.routerRule(location));
+    });
+  }, [])
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
